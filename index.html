@@ -306,8 +306,15 @@
     $('#clear').addEventListener('click', resetFilters);
 
     $('#contactLine').textContent = siteContact ? '請洽 ' + siteContact + '。' : '';
-    const latest = tools.map((t) => t.updated).filter(Boolean).sort().pop();
-    if (latest) $('#siteUpdated').textContent = '清單最後更新 ' + fmtDate(latest);
+    // 優先用 site.updated（每次修改時由 pre-commit 自動寫入，含時間）；沒有時退回工具的最新更新日
+    const stamp = site.updated ? new Date(site.updated) : null;
+    if (stamp && !isNaN(stamp)) {
+      const parts = Object.fromEntries(new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Taipei', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(stamp).map((x) => [x.type, x.value]));
+      $('#siteUpdated').textContent = '網站最後更新 ' + parts.year + '/' + parts.month + '/' + parts.day + ' ' + parts.hour + ':' + parts.minute;
+    } else {
+      const latest = tools.map((t) => t.updated).filter(Boolean).sort().pop();
+      if (latest) $('#siteUpdated').textContent = '清單最後更新 ' + fmtDate(latest);
+    }
     if (site.repo_url) $('#repoLink').append(el('a', { href: site.repo_url, target: '_blank', rel: 'noopener noreferrer', text: '原始碼' }));
 
     initAnalytics(site.ga4_measurement_id);
