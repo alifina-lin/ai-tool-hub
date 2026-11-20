@@ -76,7 +76,10 @@ button{font:inherit;color:inherit}
 .resultbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:28px 0 16px;min-height:32px;font-size:14px;color:var(--muted)}
 
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}
-.card{display:flex;flex-direction:column;padding:24px;background:var(--cream);border:1px solid var(--line);border-radius:12px;transition:border-color .15s}
+.card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,4fr);overflow:hidden;background:var(--cream);border:1px solid var(--line);border-radius:12px;transition:border-color .15s}
+.card-body{display:flex;flex-direction:column;min-width:0;padding:24px}
+.cardart{position:relative;overflow:hidden}
+.cardart svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);height:min(80%,192px);width:auto;aspect-ratio:1;fill:none;stroke:rgba(255,255,255,.6);stroke-width:.8;stroke-linecap:round;stroke-linejoin:round}
 .card:hover{border-color:var(--line-strong)}
 .card-top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px}
 .tag{display:inline-flex;align-items:center;gap:6px;padding:2px 8px;border-radius:6px;background:var(--tint);color:var(--body)}
@@ -197,3 +200,7 @@ button{font:inherit;color:inherit}
 .fgroup.minor .pill:hover{border-color:var(--line-strong)}
 .fgroup.minor .pill[aria-pressed="true"]{background:none;color:var(--ink);border-bottom-color:var(--ink);box-shadow:none}
 .fgroup.minor .pill .n,.fgroup.minor .pill[aria-pressed="true"] .n{color:var(--muted);margin-left:4px}
+
+.about{max-width:34em}
+.about p+p{margin-top:6px}
+.foot .about-lead{margin-bottom:10px;color:var(--ink);font-weight:600}

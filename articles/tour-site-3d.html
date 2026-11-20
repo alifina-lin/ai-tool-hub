@@ -86,8 +86,8 @@
 <footer class="foot" id="contact">
   <div class="foot-card">
     <div>
-      <h2>使用上遇到問題？</h2>
-      <p id="contactLine"></p>
+      <h2>關於</h2>
+      <div id="aboutBody" class="about"></div>
     </div>
     <div class="foot-r"><a href="../index.html">回工具首頁</a></div>
   </div>
@@ -98,7 +98,8 @@
   'use strict';
   fetch('../tools.json', { cache: 'no-cache' }).then((r) => r.json()).then((data) => {
     const site = data.site || {};
-    if (site.contact) document.getElementById('contactLine').textContent = '請洽 ' + site.contact + '。';
+    const box = document.getElementById('aboutBody');
+    (site.about || []).forEach((t, i) => { const p = document.createElement('p'); if (i === 0) p.className = 'about-lead'; p.textContent = t; box.append(p); });
     const id = site.ga4_measurement_id || '';
     if (!/^G-[A-Z0-9]{6,}$/i.test(id)) return;
     const s = document.createElement('script');
