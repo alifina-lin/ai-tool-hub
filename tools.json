@@ -7,7 +7,7 @@
     "ga4_measurement_id": "G-GHJP7QMYXS",
     "repo_url": "",
     "show_stats": false,
-    "updated": "2026-11-20T14:42:28+08:00"
+    "updated": "2026-11-20T15:34:07+08:00"
   },
   "tools": [
     {
@@ -18,7 +18,7 @@
       ],
       "carrier": "網頁",
       "status": "穩定",
-      "summary": "檔案只在自己的電腦處理，把 CSV、Excel、Word 裡的個資遮罩後匯出。",
+      "summary": "檔案不離開電腦，遮罩名單裡的個資。",
       "audience": "需處理或外傳含個資檔案的同仁",
       "purpose": "要把名單、報名表交給他人，或拿去做分析前，先遮蔽電話、Email、身分證字號等個資。",
       "steps": [
@@ -53,7 +53,7 @@
       ],
       "carrier": "Skill",
       "status": "試用中",
-      "summary": "把資安政得時的貼文轉成適合大型電子螢幕輪播的圖片，每張附原貼文 QR Code。",
+      "summary": "資安貼文轉成大螢幕圖，附 QR Code。",
       "audience": "負責公共空間螢幕或資安宣導的同仁",
       "purpose": "公共空間的螢幕要更新輪播內容時，一次產出 10 張主題不重複、1920×1080 的圖片。",
       "detailsLabel": "安裝方式",
@@ -90,7 +90,7 @@
       ],
       "carrier": "AI 助理",
       "status": "穩定",
-      "summary": "一步步引導你，從零做出自己的 Chatbot。",
+      "summary": "一步步引導，從零做出自己的 Chatbot。",
       "audience": "想為單位建置 Chatbot 的同仁",
       "purpose": "想為單位建置 Chatbot，但不知道從哪裡開始時使用。",
       "steps": [
@@ -118,7 +118,7 @@
       ],
       "carrier": "網頁",
       "status": "穩定",
-      "summary": "產生可貼到網站的 Chatbot 對話氣泡程式碼。",
+      "summary": "產生可貼到網站的 Chatbot 氣泡程式碼。",
       "audience": "要把 Chatbot 放上網站的同仁",
       "purpose": "Chatbot 做好後，要放到單位網站、讓訪客直接點開對話時使用。",
       "steps": [
@@ -146,7 +146,7 @@
       ],
       "carrier": "網頁",
       "status": "穩定",
-      "summary": "把文字資料輸出可以逛的 3D 微縮世界導覽網站。",
+      "summary": "一份資料，變成可以逛的 3D 導覽網站。",
       "audience": "想把資料做成互動導覽網站的同仁",
       "purpose": "想把一份介紹資料做成可以逛的 3D 導覽網站時使用，場景可選小島、大樓、市集。",
       "steps": [
@@ -174,7 +174,7 @@
       ],
       "carrier": "AI 助理",
       "status": "試用中",
-      "summary": "用狗血反轉劇情，包裝教學與教育類標的的廣告文案。",
+      "summary": "用狗血反轉劇情，寫教育宣傳文案。",
       "audience": "經營社群、需要製作宣傳內容的同仁",
       "purpose": "想讓課程招生、教育活動或衛教宣傳更吸睛時使用。",
       "steps": [
@@ -202,7 +202,7 @@
       ],
       "carrier": "AI 助理",
       "status": "穩定",
-      "summary": "透過訪談，為你的單位打造專屬的公告、公務郵件撰寫與中英翻譯 Gem。",
+      "summary": "訪談後，為你的單位打造專屬寫作翻譯 Gem。",
       "audience": "政大各行政單位承辦人",
       "purpose": "想為自己的單位做一個專屬的公告、公務郵件撰寫暨中英翻譯助理時使用。",
       "note": "教育版 Gem 預計 2027 年中下架。",
@@ -232,7 +232,7 @@
       ],
       "carrier": "AI 助理",
       "status": "穩定",
-      "summary": "協助電算中心同仁撰寫與中英翻譯公告、公務郵件。",
+      "summary": "協助撰寫與中英翻譯公告、公務郵件。",
       "audience": "電算中心同仁",
       "purpose": "要寫公告或公務郵件，或需要中英翻譯時使用。",
       "steps": [

@@ -177,6 +177,8 @@
             el('h4', { class: 'plabel', text: tool.detailsLabel === '安裝方式' ? '安裝與使用' : '使用方式' }),
             el('ol', {}, tool.steps.map((s) => el('li', { text: s })))) : null,
           el('dl', { class: 'pmeta' },
+            el('dt', { text: '對象' }), el('dd', { text: tool.audience }),
+            el('dt', { text: '用法' }), el('dd', { text: tool.usage }),
             el('dt', { text: '分類' }), el('dd', { text: catsOf(tool) }),
             el('dt', { text: '最後更新' }), el('dd', { text: fmtDate(tool.updated) }),
             el('dt', { text: '聯絡窗口' }), el('dd', { text: tool.contact || siteContact }))
@@ -190,10 +192,6 @@
       ),
       el('h3', { text: tool.name }),
       el('p', { class: 'summary', text: tool.summary }),
-      el('dl', { class: 'meta' },
-        el('dt', { text: '對象' }), el('dd', { text: tool.audience }),
-        el('dt', { text: '用法' }), el('dd', { text: tool.usage })
-      ),
       tool.note ? el('p', { class: 'note', text: tool.note }) : null,
       el('div', { class: 'actions' }, actionNodes),
       panel
@@ -203,7 +201,7 @@
   /* ---------- 篩選與繪製 ---------- */
   function pillGroup(label, key) {
     const values = [ALL, ...uniq(key)];
-    const group = el('div', { class: 'fgroup', role: 'group', 'aria-label': label },
+    const group = el('div', { class: 'fgroup' + (key === 'carrier' ? ' minor' : ''), role: 'group', 'aria-label': label },
       el('span', { class: 'flabel', text: label }));
     const pills = el('div', { class: 'pills' });
     values.forEach((v) => {

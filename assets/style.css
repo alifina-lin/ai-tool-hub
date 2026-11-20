@@ -189,3 +189,11 @@ button{font:inherit;color:inherit}
 .gal img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
 .gal figcaption{margin-top:10px;font-size:14px;color:var(--muted)}
 .gal strong{color:var(--ink);font-weight:600}
+
+/* 載體篩選降為次要：小字、無外框，選中時才有底線 */
+.fgroup.minor .flabel{font-size:13px}
+.fgroup.minor .pills{gap:4px 14px}
+.fgroup.minor .pill{padding:2px 0;border:0;border-bottom:1.5px solid transparent;border-radius:0;background:none;font-size:13px;color:var(--muted);box-shadow:none}
+.fgroup.minor .pill:hover{border-color:var(--line-strong)}
+.fgroup.minor .pill[aria-pressed="true"]{background:none;color:var(--ink);border-bottom-color:var(--ink);box-shadow:none}
+.fgroup.minor .pill .n,.fgroup.minor .pill[aria-pressed="true"] .n{color:var(--muted);margin-left:4px}
