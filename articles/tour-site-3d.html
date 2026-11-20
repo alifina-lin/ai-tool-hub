@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D導覽：把一份資料，變成一座可以逛的小世界</title>
+<meta name="description" content="給一份資料，整理成六張表，輸出一個可以逛的 3D 導覽網站。小島、大樓、市集，三種場景任選。">
+<meta name="theme-color" content="#f7f4ed">
+<meta property="og:title" content="3D導覽：把一份資料，變成一座可以逛的小世界">
+<meta property="og:description" content="給一份資料，輸出一個可以逛的 3D 導覽網站。">
+<meta property="og:image" content="../assets/tour-island.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231c1c1c'/%3E%3Cg fill='%23f7f4ed'%3E%3Crect x='7' y='7' width='7' height='7' rx='2'/%3E%3Crect x='18' y='7' width='7' height='7' rx='2'/%3E%3Crect x='7' y='18' width='7' height='7' rx='2'/%3E%3Crect x='18' y='18' width='7' height='7' rx='2'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="../index.html" aria-label="回到工具首頁">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1c1c1c"/><g fill="#f7f4ed"><rect x="5" y="5" width="6" height="6" rx="1.6"/><rect x="13" y="5" width="6" height="6" rx="1.6"/><rect x="5" y="13" width="6" height="6" rx="1.6"/><rect x="13" y="13" width="6" height="6" rx="1.6"/></g></svg>
+      <span id="siteName">工作小工具分享站</span>
+    </a>
+    <nav class="nav-links" aria-label="頁面導覽">
+      <a href="../index.html#tools">工具</a>
+      <a href="../index.html#showcase">成品</a>
+    </nav>
+  </div>
+</header>
+
+<main class="art">
+  <section class="art-hero">
+    <p class="eyebrow">3D導覽小幫手</p>
+    <h1>一份資料，<br>一座小世界。</h1>
+    <p class="lead">把介紹資料交給 AI，整理成六張表。預覽滿意，就輸出一個可以用滑鼠與手指逛的 3D 導覽網站。</p>
+    <div class="btns">
+      <a class="btn btn-primary btn-lg" data-track="open_tour_builder" href="https://alifina-lin.github.io/tour-site-builder-3d/" target="_blank" rel="noopener noreferrer">前往 3D導覽小幫手</a>
+    </div>
+    <img class="art-img" src="../assets/tour-island.jpg" width="1280" height="720" alt="3D導覽示範：六座六角形小島，每座島是一個分類，島上有建築、道路與行人。">
+    <ul class="nums" aria-label="3D導覽特色">
+      <li><b>6</b><span>張表，整理好資料</span></li>
+      <li><b>3</b><span>種場景可選</span></li>
+      <li><b>1</b><span>個 HTML 檔，離線也能開</span></li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <h2>逛一圈，就看懂。</h2>
+    <p>每個分類是一座島、一層樓、一個市集分區。每個項目是一棟建築、一間房、一個攤位。</p>
+    <p>鏡頭帶著你走一圈。想看細節，點開任何一處就好。</p>
+    <p>資料不再只是一份文件。它是一個可以走進去的地方。</p>
+  </section>
+
+  <section class="sec">
+    <h2>三種場景，任你選。</h2>
+    <div class="gal">
+      <figure><img src="../assets/tour-island.jpg" width="1280" height="720" loading="lazy" alt="小島場景：六角形小島之間有道路相連。"><figcaption><strong>小島</strong>　每個分類一座六角形島，島間有道路，路上有人、貓、鴿子。</figcaption></figure>
+      <figure><img src="../assets/tour-tower.jpg" width="1280" height="720" loading="lazy" alt="大樓場景：玻璃帷幕大樓，每層標示一個分類。"><figcaption><strong>大樓</strong>　玻璃帷幕大樓，每個分類一層，每個項目一間房。點樓層，穿過玻璃走進去。</figcaption></figure>
+      <figure><img src="../assets/tour-market.jpg" width="1280" height="720" loading="lazy" alt="市集場景：紅磚廣場上的帳篷市集與人潮。"><figcaption><strong>市集</strong>　紅磚廣場上的帳篷市集，每個分類一區，每個項目一個攤位，導覽沿著走道走到攤位前。</figcaption></figure>
+    </div>
+    <p style="margin-top:20px">以上都是示範成品。網站會依電腦時間，自動切換白天與夜晚。</p>
+  </section>
+
+  <section class="sec">
+    <h2>四個步驟，不用寫程式。</h2>
+    <p>開啟小幫手，先按「載入範例看看」，了解效果。</p>
+    <p>請 AI 把你的原始資料整理成六張表。頁面左上有說明，還有可以直接複製的指令。</p>
+    <p>把六張表貼到左邊，即時預覽。右上可以切換場景。</p>
+    <p>滿意了，按「下載我的導覽網站」。你會得到一個單一 HTML 檔，離線也能開啟。</p>
+  </section>
+
+  <section class="sec">
+    <h2>適合這些時候。</h2>
+    <p>單位介紹、服務總覽、新生導覽、計畫成果。只要有一份介紹資料，想讓人願意逛一逛，就適合。</p>
+    <p>使用時，瀏覽器需要支援 WebGL。近幾年的 Chrome、Edge、Safari、Firefox 都可以。</p>
+  </section>
+
+  <section class="art-end">
+    <h2>換你做一座。</h2>
+    <p>免帳號，打開就能開始。先載入範例，看看效果。</p>
+    <div class="btns">
+      <a class="btn btn-primary" data-track="open_tour_builder" href="https://alifina-lin.github.io/tour-site-builder-3d/" target="_blank" rel="noopener noreferrer">前往 3D導覽小幫手</a>
+      <a class="btn btn-ghost" href="../index.html#tools">回工具清單</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="contact">
+  <div class="foot-card">
+    <div>
+      <h2>使用上遇到問題？</h2>
+      <p id="contactLine"></p>
+    </div>
+    <div class="foot-r"><a href="../index.html">回工具首頁</a></div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+  fetch('../tools.json', { cache: 'no-cache' }).then((r) => r.json()).then((data) => {
+    const site = data.site || {};
+    if (site.contact) document.getElementById('contactLine').textContent = '請洽 ' + site.contact + '。';
+    const id = site.ga4_measurement_id || '';
+    if (!/^G-[A-Z0-9]{6,}$/i.test(id)) return;
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', id);
+    document.querySelectorAll('[data-track]').forEach((a) =>
+      a.addEventListener('click', () => window.gtag('event', a.dataset.track, { page: 'tour-site-3d' })));
+  }).catch(() => {});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+{
+  "site": {
+    "name": "工作小工具分享站",
+    "headline": "寫給同事用的小工具",
+    "lead": "網頁、Skill、AI 助理，挑一個，直接開始用。",
+    "contact": "#62547 Lin",
+    "ga4_measurement_id": "G-GHJP7QMYXS",
+    "repo_url": "",
+    "show_stats": false
+  },
+  "tools": [
+    {
+      "id": "pii-masking",
+      "name": "個資遮罩工具",
+      "categories": [
+        "資安與個資"
+      ],
+      "carrier": "網頁",
+      "status": "穩定",
+      "summary": "檔案只在自己的電腦處理，把 CSV、Excel、Word 裡的個資遮罩後匯出。",
+      "audience": "需處理或外傳含個資檔案的同仁",
+      "purpose": "要把名單、報名表交給他人，或拿去做分析前，先遮蔽電話、Email、身分證字號等個資。",
+      "steps": [
+        "開啟工具，或下載離線版後用瀏覽器開啟。",
+        "把檔案拖進視窗，支援 CSV、XLSX、DOCX。",
+        "檢視預覽，點選可取消不需遮罩的內容，也能手動新增遮罩。",
+        "匯出遮罩後的檔案。圖片內的文字與照片的拍攝資訊不會被處理，請自行再檢查一次。",
+        "選用：AI 輔助只會把你用白話描述的規則轉成遮罩規則，不會收到檔案內容。"
+      ],
+      "actions": [
+        {
+          "label": "開啟使用",
+          "href": "downloads/pii-masking-tool-v1.1.html",
+          "kind": "open",
+          "style": "primary"
+        },
+        {
+          "label": "下載離線版",
+          "href": "downloads/pii-masking-tool-v1.1.html",
+          "kind": "download",
+          "style": "ghost"
+        }
+      ],
+      "updated": "2026-11-02",
+      "usage": "免帳號、免安裝，用瀏覽器開啟；AI 輔助建規則為選用"
+    },
+    {
+      "id": "cybersecurity-screen-posts",
+      "name": "資安貼文轉大螢幕",
+      "categories": [
+        "資安與個資"
+      ],
+      "carrier": "Skill",
+      "status": "試用中",
+      "summary": "把資安政得時的貼文轉成適合大型電子螢幕輪播的圖片，每張附原貼文 QR Code。",
+      "audience": "負責公共空間螢幕或資安宣導的同仁",
+      "purpose": "公共空間的螢幕要更新輪播內容時，一次產出 10 張主題不重複、1920×1080 的圖片。",
+      "detailsLabel": "安裝方式",
+      "steps": [
+        "下載 Skill 壓縮檔。",
+        "在 Claude 或 ChatGPT 的 Skill 功能中上傳並啟用。",
+        "對 AI 說：「請使用 cybersecurity-screen-posts，到資安政得時 Facebook 蒐集公開貼文與圖片，選出 10 則不重複主題並整理永久連結，先給我確認選題。」",
+        "確認選題後，AI 會先試作第 1 張讓你確認風格，再完成其餘圖片。",
+        "AI 會檢查每張圖的 QR Code 都能連回原貼文，最後打包成 ZIP 交給你。",
+        "上線前，請用手機在螢幕前抽查 QR Code。"
+      ],
+      "actions": [
+        {
+          "label": "查看安裝方式",
+          "kind": "details",
+          "style": "primary"
+        },
+        {
+          "label": "下載 Skill 包",
+          "href": "downloads/cybersecurity-screen-posts.zip",
+          "kind": "download",
+          "style": "ghost"
+        }
+      ],
+      "updated": "2026-11-19",
+      "usage": "需在 Claude 或 ChatGPT 中使用 Skill，並能上網、產圖與執行程式"
+    },
+    {
+      "id": "queba",
+      "name": "確吧－打造你的 Chatbot",
+      "categories": [
+        "打造 AI 工具",
+        "Chatbot"
+      ],
+      "carrier": "AI 助理",
+      "status": "穩定",
+      "summary": "一步步引導你，從零做出自己的 Chatbot。",
+      "audience": "想為單位建置 Chatbot 的同仁",
+      "purpose": "想為單位建置 Chatbot，但不知道從哪裡開始時使用。",
+      "steps": [
+        "開啟連結，直接在對話視窗開始。",
+        "依 AI 的引導，逐步說明你要做的 Chatbot。",
+        "取得產出的內容後，依指示完成建置。"
+      ],
+      "actions": [
+        {
+          "label": "前往使用",
+          "href": "https://copilotstudio.microsoft.com/environments/Default-35157425-5c3c-4672-aaa4-68fb6a8c9612/bots/cr316_ABCChatbotBuilder/canvas?__version__=2&enableFileAttachment=true&tenantId=35157425-5c3c-4672-aaa4-68fb6a8c9612",
+          "kind": "open",
+          "style": "primary"
+        }
+      ],
+      "updated": "2026-07-01",
+      "usage": "免登入、免安裝，用瀏覽器開啟"
+    },
+    {
+      "id": "chatbot-embed",
+      "name": "Chatbot 嵌入網頁產生器",
+      "categories": [
+        "Chatbot",
+        "網站建置"
+      ],
+      "carrier": "網頁",
+      "status": "穩定",
+      "summary": "產生可貼到網站的 Chatbot 對話氣泡程式碼。",
+      "audience": "要把 Chatbot 放上網站的同仁",
+      "purpose": "Chatbot 做好後，要放到單位網站、讓訪客直接點開對話時使用。",
+      "steps": [
+        "開啟工具。",
+        "選擇顯示方式：懸浮視窗，或跳轉到新頁面。",
+        "依畫面設定圖示與配色。",
+        "複製產生的程式碼，貼到網站頁面的 </body> 之前。"
+      ],
+      "actions": [
+        {
+          "label": "前往使用",
+          "href": "https://alifina-lin.github.io/chatbot-plugin-generator/",
+          "kind": "open",
+          "style": "primary"
+        }
+      ],
+      "updated": "2026-7-19",
+      "usage": "免帳號、免安裝；貼上程式碼時需能編輯網站頁面"
+    },
+    {
+      "id": "tour-site-3d",
+      "name": "3D導覽小幫手",
+      "categories": [
+        "網站建置"
+      ],
+      "carrier": "網頁",
+      "status": "穩定",
+      "summary": "把文字資料輸出可以逛的 3D 微縮世界導覽網站。",
+      "audience": "想把資料做成互動導覽網站的同仁",
+      "purpose": "想把一份介紹資料做成可以逛的 3D 導覽網站時使用，場景可選小島、大樓、市集。",
+      "steps": [
+        "開啟小幫手，可先按「載入範例看看」了解效果。",
+        "請 AI 把你的原始資料整理成六張表，頁面左上有說明與可複製的指令。",
+        "把六張表貼到畫面左邊，即時預覽，右上可切換場景。",
+        "滿意後按「下載我的導覽網站」，得到可離線開啟的單一 HTML 檔。"
+      ],
+      "actions": [
+        {
+          "label": "前往使用",
+          "href": "https://alifina-lin.github.io/tour-site-builder-3d/",
+          "kind": "open",
+          "style": "primary"
+        }
+      ],
+      "updated": "2026-11-16",
+      "usage": "免帳號；需先請 AI 把資料整理成六張表；瀏覽器需支援 WebGL"
+    },
+    {
+      "id": "reverse-story",
+      "name": "反轉故事產生器",
+      "categories": [
+        "內容創作"
+      ],
+      "carrier": "AI 助理",
+      "status": "試用中",
+      "summary": "用狗血反轉劇情，包裝教學與教育類標的的廣告文案。",
+      "audience": "經營社群、需要製作宣傳內容的同仁",
+      "purpose": "想讓課程招生、教育活動或衛教宣傳更吸睛時使用。",
+      "steps": [
+        "開啟連結。",
+        "輸入要宣傳的教學或教育類標的與重點。",
+        "取得廣告文案後，依需求調整再使用。"
+      ],
+      "actions": [
+        {
+          "label": "前往使用",
+          "href": "https://share.gemini.google/UA6pwkF3t1yV",
+          "kind": "open",
+          "style": "primary"
+        }
+      ],
+      "updated": "2026-11-19",
+      "usage": "需 Google 帳號登入 Gemini"
+    },
+    {
+      "id": "xiefanni",
+      "name": "寫翻你",
+      "categories": [
+        "打造 AI 工具",
+        "內容創作"
+      ],
+      "carrier": "AI 助理",
+      "status": "穩定",
+      "summary": "透過訪談，為你的單位打造專屬的公告、公務郵件撰寫與中英翻譯 Gem。",
+      "audience": "政大各行政單位承辦人",
+      "purpose": "想為自己的單位做一個專屬的公告、公務郵件撰寫暨中英翻譯助理時使用。",
+      "note": "教育版 Gem 預計 2027 年中下架。",
+      "steps": [
+        "開啟連結，與寫翻你對話。",
+        "回答它的訪談問題，說明你單位的寫作與翻譯需求。",
+        "取得可直接部署的 Gem 系統 Prompt 與操作步驟。",
+        "依步驟在 Gemini 建立屬於你單位的「＿＿寫翻你」。"
+      ],
+      "actions": [
+        {
+          "label": "前往使用",
+          "href": "https://gemini.google.com/gem/10WLGEnFTMsAQjH1o43gJ8FkJf4Imuhh-?usp=sharing",
+          "kind": "open",
+          "style": "primary"
+        }
+      ],
+      "updated": "2026-11-19",
+      "usage": "需可使用 Gemini 教育版 Gem 的 Google 帳號"
+    },
+    {
+      "id": "cc-xiefanni",
+      "name": "CC寫翻你",
+      "categories": [
+        "內容創作",
+        "Chatbot"
+      ],
+      "carrier": "AI 助理",
+      "status": "穩定",
+      "summary": "協助電算中心同仁撰寫與中英翻譯公告、公務郵件。",
+      "audience": "電算中心同仁",
+      "purpose": "要寫公告或公務郵件，或需要中英翻譯時使用。",
+      "steps": [
+        "開啟連結，查看介紹與使用方式。",
+        "選擇用 Copilot agent 或 LINE Bot 開始。",
+        "輸入要撰寫或翻譯的內容。"
+      ],
+      "actions": [
+        {
+          "label": "查看介紹",
+          "href": "https://support.video.nccu.edu.tw/media/660",
+          "kind": "open",
+          "style": "primary"
+        }
+      ],
+      "updated": "2026-11-19",
+      "usage": "以 Copilot agent 或 LINE Bot 使用"
+    }
+  ],
+  "showcase": [
+    {
+      "id": "queba-universe",
+      "title": "確吧宇宙：全校的行政 AI 小幫手，一站找齊",
+      "summary": "問就對了。各單位做的 Chatbot，都在這裡。",
+      "image": "assets/queba-universe.jpg",
+      "alt": "確吧宇宙首頁示意：四張問題卡片，標示驗證星系與 Beta 星系。",
+      "href": "articles/queba-universe.html"
+    },
+    {
+      "id": "tour-site-3d",
+      "title": "3D導覽：把一份資料，變成一座可以逛的小世界",
+      "summary": "小島、大樓、市集，三種場景任選。逛一圈，就看懂一份資料。",
+      "image": "assets/tour-island.jpg",
+      "alt": "3D導覽示範：六座六角形小島，每座島是一個分類，島上有建築、道路與行人。",
+      "href": "articles/tour-site-3d.html"
+    }
+  ]
+}

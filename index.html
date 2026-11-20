@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>工作小工具分享站</title>
+<meta name="description" content="寫給同事用的工作小工具：網頁、Skill、AI 助理，整理在同一個地方。">
+<meta name="theme-color" content="#f7f4ed">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231c1c1c'/%3E%3Cg fill='%23f7f4ed'%3E%3Crect x='7' y='7' width='7' height='7' rx='2'/%3E%3Crect x='18' y='7' width='7' height='7' rx='2'/%3E%3Crect x='7' y='18' width='7' height='7' rx='2'/%3E%3Crect x='18' y='18' width='7' height='7' rx='2'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="回到頁首">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1c1c1c"/><g fill="#f7f4ed"><rect x="5" y="5" width="6" height="6" rx="1.6"/><rect x="13" y="5" width="6" height="6" rx="1.6"/><rect x="5" y="13" width="6" height="6" rx="1.6"/><rect x="13" y="13" width="6" height="6" rx="1.6"/></g></svg>
+      <span id="siteName">工作小工具分享站</span>
+    </a>
+    <nav class="nav-links" aria-label="頁面導覽">
+      <a href="#tools">工具</a>
+      <a href="#showcase" id="navShowcase" hidden>成品</a>
+      <a href="#contact">聯絡</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <h1 id="headline">寫給同事用的工作小工具</h1>
+    <p class="lead" id="lead">網頁、Skill、AI 助理，整理在同一個地方。挑一個，直接開始用。</p>
+    <div class="hero-cta"><a class="btn btn-primary btn-lg" href="#tools">瀏覽工具</a></div>
+    <div class="stats" id="stats" aria-label="工具統計"></div>
+  </section>
+
+  <section class="tools" id="tools" aria-labelledby="toolsTitle">
+    <h2 class="sr" id="toolsTitle">工具清單</h2>
+    <div class="filters" id="filters"></div>
+    <div class="resultbar">
+      <span id="count" aria-live="polite"></span>
+      <button class="btn btn-text" id="clear" type="button" hidden>清除篩選</button>
+    </div>
+    <div class="grid" id="grid"></div>
+    <noscript><div class="error">這個頁面需要啟用 JavaScript 才能顯示工具清單。</div></noscript>
+  </section>
+  <section class="showcase" id="showcase" aria-labelledby="showcaseTitle" hidden>
+    <h2 id="showcaseTitle">成品介紹</h2>
+    <p class="sub">看看用這些工具做出了什麼。</p>
+    <div class="sgrid" id="sgrid"></div>
+  </section>
+</main>
+
+<footer class="foot" id="contact">
+  <div class="foot-card">
+    <div>
+      <h2>使用上遇到問題？</h2>
+      <p id="contactLine"></p>
+    </div>
+    <div class="foot-r">
+      <div id="siteUpdated"></div>
+      <div id="repoLink"></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+
+  const ALL = '全部';
+  const state = { cat: ALL, carrier: ALL };
+  const openIds = new Set();
+  let tools = [];
+
+  /* ---------- 小工具 ---------- */
+  const ICONS = {
+    '網頁': '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg>',
+    'Skill': '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M4 7.5L12 12l8-4.5M12 12v9"/></svg>',
+    'AI 助理': '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z"/></svg>'
+  };
+  const FALLBACK_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/></svg>';
+  const CHEVRON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+
+  const $ = (s) => document.querySelector(s);
+
+  function el(tag, props, ...kids) {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(props || {})) {
+      if (v == null) continue;
+      if (k === 'class') n.className = v;
+      else if (k === 'text') n.textContent = v;
+      else if (k === 'html') n.innerHTML = v;
+      else if (k.startsWith('on')) n.addEventListener(k.slice(2), v);
+      else n.setAttribute(k, v);
+    }
+    for (const kid of kids.flat()) if (kid != null) n.append(kid);
+    return n;
+  }
+
+  const fmtDate = (s) => String(s || '').replace(/-/g, '/');
+  const uniq = (key) => [...new Set(tools.flatMap((t) => key === 'categories' ? (t.categories || []) : [t[key]]))];
+  const catsOf = (t) => (t.categories || []).join('、');
+
+  /* ---------- GA4 ---------- */
+  function initAnalytics(id) {
+    if (!/^G-[A-Z0-9]{6,}$/i.test(id || '')) {
+      console.info('[tools] 尚未設定 GA4 Measurement ID，不會送出任何分析事件。');
+      return;
+    }
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', id);
+  }
+  function track(name, params) {
+    if (typeof window.gtag === 'function') window.gtag('event', name, params);
+  }
+
+  /* ---------- 卡片 ---------- */
+  function toggleDetails(id) {
+    const open = !openIds.has(id);
+    open ? openIds.add(id) : openIds.delete(id);
+    const card = document.querySelector('[data-id="' + id + '"]');
+    if (!card) return;
+    const panel = card.querySelector('.panel');
+    panel.classList.toggle('open', open);
+    panel.inert = !open;
+    card.querySelectorAll('[data-toggle]').forEach((b) => b.setAttribute('aria-expanded', String(open)));
+  }
+
+  function actionNode(tool, a, panelId) {
+    const cls = 'btn ' + (a.style === 'ghost' ? 'btn-ghost' : 'btn-primary');
+    if (a.kind === 'details') {
+      return el('button', {
+        class: cls, type: 'button', 'data-toggle': '',
+        'aria-expanded': String(openIds.has(tool.id)), 'aria-controls': panelId,
+        onclick: () => toggleDetails(tool.id), text: a.label
+      });
+    }
+    const isDownload = a.kind === 'download';
+    const attrs = {
+      class: cls, href: a.href, text: a.label,
+      onclick: () => track('tool_click', {
+        tool_id: tool.id, tool_name: tool.name, carrier: tool.carrier,
+        categories: (tool.categories || []).join(','), category: (tool.categories || [])[0] || '', link_type: isDownload ? 'download' : 'open'
+      })
+    };
+    if (isDownload) attrs.download = '';
+    else { attrs.target = '_blank'; attrs.rel = 'noopener noreferrer'; }
+    return el('a', attrs);
+  }
+
+  function cardNode(tool) {
+    const panelId = 'panel-' + tool.id;
+    const isOpen = openIds.has(tool.id);
+    const actions = (tool.actions || []).slice();
+    const hasDetailsBtn = actions.some((a) => a.kind === 'details');
+
+    const actionNodes = actions.map((a) => actionNode(tool, a, panelId));
+    if (!hasDetailsBtn) {
+      actionNodes.push(el('button', {
+        class: 'btn btn-text', type: 'button', 'data-toggle': '',
+        'aria-expanded': String(isOpen), 'aria-controls': panelId,
+        onclick: () => toggleDetails(tool.id)
+      }, tool.detailsLabel || '使用說明', el('span', { html: CHEVRON, 'aria-hidden': 'true', style: 'display:inline-flex' })));
+    }
+
+    const panel = el('div', { class: 'panel' + (isOpen ? ' open' : ''), id: panelId, role: 'region', 'aria-label': tool.name + '的說明' },
+      el('div', {},
+        el('div', { class: 'panel-in' },
+          tool.purpose ? el('div', { class: 'block' }, el('h4', { class: 'plabel', text: '用途與場景' }), el('p', { text: tool.purpose })) : null,
+          (tool.steps && tool.steps.length) ? el('div', { class: 'block' },
+            el('h4', { class: 'plabel', text: tool.detailsLabel === '安裝方式' ? '安裝與使用' : '使用方式' }),
+            el('ol', {}, tool.steps.map((s) => el('li', { text: s })))) : null,
+          el('dl', { class: 'pmeta' },
+            el('dt', { text: '分類' }), el('dd', { text: catsOf(tool) }),
+            el('dt', { text: '最後更新' }), el('dd', { text: fmtDate(tool.updated) }),
+            el('dt', { text: '聯絡窗口' }), el('dd', { text: tool.contact || siteContact }))
+        )));
+    panel.inert = !isOpen;
+
+    return el('article', { class: 'card', 'data-id': tool.id },
+      el('div', { class: 'card-top' },
+        el('span', { class: 'tag' }, el('span', { html: ICONS[tool.carrier] || FALLBACK_ICON, style: 'display:inline-flex' }), tool.carrier),
+        el('span', { class: 'status' }, el('span', { class: 'dot' + (tool.status === '穩定' ? ' on' : ''), 'aria-hidden': 'true' }), tool.status)
+      ),
+      el('h3', { text: tool.name }),
+      el('p', { class: 'summary', text: tool.summary }),
+      el('dl', { class: 'meta' },
+        el('dt', { text: '對象' }), el('dd', { text: tool.audience }),
+        el('dt', { text: '用法' }), el('dd', { text: tool.usage })
+      ),
+      tool.note ? el('p', { class: 'note', text: tool.note }) : null,
+      el('div', { class: 'actions' }, actionNodes),
+      panel
+    );
+  }
+
+  /* ---------- 篩選與繪製 ---------- */
+  function pillGroup(label, key) {
+    const values = [ALL, ...uniq(key)];
+    const group = el('div', { class: 'fgroup', role: 'group', 'aria-label': label },
+      el('span', { class: 'flabel', text: label }));
+    const pills = el('div', { class: 'pills' });
+    values.forEach((v) => {
+      const n = v === ALL ? tools.length : tools.filter((t) => key === 'categories' ? (t.categories || []).includes(v) : t[key] === v).length;
+      const b = el('button', {
+        class: 'pill', type: 'button', 'data-key': key, 'data-value': v,
+        'aria-pressed': String(state[key === 'categories' ? 'cat' : 'carrier'] === v),
+        onclick: () => {
+          state[key === 'categories' ? 'cat' : 'carrier'] = v;
+          syncPills();
+          render();
+        }
+      }, v, el('span', { class: 'n', text: String(n) }));
+      pills.append(b);
+    });
+    group.append(pills);
+    return group;
+  }
+  function syncPills() {
+    document.querySelectorAll('.pill').forEach((b) => {
+      const cur = b.dataset.key === 'categories' ? state.cat : state.carrier;
+      b.setAttribute('aria-pressed', String(cur === b.dataset.value));
+    });
+  }
+  function resetFilters() {
+    state.cat = ALL; state.carrier = ALL;
+    syncPills(); render();
+  }
+
+  function render() {
+    const list = tools.filter((t) =>
+      (state.cat === ALL || (t.categories || []).includes(state.cat)) &&
+      (state.carrier === ALL || t.carrier === state.carrier));
+    const grid = $('#grid');
+    grid.replaceChildren();
+    if (!list.length) {
+      grid.append(el('div', { class: 'empty' },
+        el('p', { text: '沒有符合這組條件的工具。' }),
+        el('button', { class: 'btn btn-ghost', type: 'button', onclick: resetFilters, text: '清除篩選' })));
+    } else {
+      list.forEach((t) => grid.append(cardNode(t)));
+    }
+    const filtered = state.cat !== ALL || state.carrier !== ALL;
+    $('#count').textContent = filtered ? '顯示 ' + list.length + ' / ' + tools.length + ' 款工具' : '共 ' + tools.length + ' 款工具';
+    $('#clear').hidden = !filtered;
+  }
+
+  /* ---------- 成品展示 ---------- */
+  function renderShowcase(items) {
+    if (!items.length) return;
+    $('#sgrid').append(...items.map((it) => el('article', { class: 'scard' },
+      el('img', { src: it.image, alt: it.alt || '', loading: 'lazy', width: '1600', height: '900' }),
+      el('div', { class: 'sbody' },
+        el('h3', {}, el('a', { href: it.href, onclick: () => track('showcase_click', { showcase_id: it.id, showcase_title: it.title }), text: it.title })),
+        el('p', { text: it.summary })))));
+    $('#showcase').hidden = false;
+    $('#navShowcase').hidden = false;
+  }
+
+  /* ---------- 啟動 ---------- */
+  let siteContact = '';
+
+  async function init() {
+    let data;
+    try {
+      const res = await fetch('tools.json', { cache: 'no-cache' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      data = await res.json();
+    } catch (e) {
+      $('#grid').replaceChildren(el('div', { class: 'error' },
+        el('p', { text: '無法載入工具清單（tools.json）。' }),
+        el('p', { html: '若是在自己的電腦預覽，不能直接雙擊 index.html，請在資料夾內執行 <code>python3 -m http.server</code>，再開啟 <code>http://localhost:8000</code>。' })));
+      $('#count').textContent = '';
+      return;
+    }
+
+    const site = data.site || {};
+    tools = data.tools || [];
+    siteContact = site.contact || '';
+
+    if (site.name) { document.title = site.name; $('#siteName').textContent = site.name; }
+    if (site.headline) $('#headline').textContent = site.headline;
+    if (site.lead) $('#lead').textContent = site.lead;
+
+    // 統計列先隱藏；工具變多後，在 tools.json 把 site.show_stats 改成 true 即可顯示
+    if (site.show_stats === true) {
+      const stats = [
+        [tools.length, '款工具'],
+        [uniq('carrier').length, '種使用方式'],
+        [uniq('categories').length, '個分類']
+      ];
+      $('#stats').append(...stats.map(([n, l]) => el('div', { class: 'stat' },
+        el('div', { class: 'stat-n', text: String(n) }), el('div', { class: 'stat-l', text: l }))));
+    } else {
+      $('#stats').remove();
+    }
+
+    const filters = $('#filters');
+    filters.append(pillGroup('分類', 'categories'), pillGroup('載體', 'carrier'));
+    $('#clear').addEventListener('click', resetFilters);
+
+    $('#contactLine').textContent = siteContact ? '請洽 ' + siteContact + '。' : '';
+    const latest = tools.map((t) => t.updated).filter(Boolean).sort().pop();
+    if (latest) $('#siteUpdated').textContent = '清單最後更新 ' + fmtDate(latest);
+    if (site.repo_url) $('#repoLink').append(el('a', { href: site.repo_url, target: '_blank', rel: 'noopener noreferrer', text: '原始碼' }));
+
+    initAnalytics(site.ga4_measurement_id);
+    render();
+    renderShowcase(data.showcase || []);
+  }
+
+  const nav = $('#nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  init();
+})();
+</script>
+</body>
+</html>
