@@ -95,6 +95,19 @@
     ['#ff9a85', '#ffc46e', 160], ['#ffb36e', '#ff8f9c', 200], ['#ff9fb0', '#ffc08a', 150], ['#ffc46e', '#ff9a85', 210],
     ['#f59ab8', '#ffb978', 170], ['#ffa98a', '#f7c873', 190], ['#ff9a9a', '#ffb36e', 140], ['#f7a0c0', '#ffc98a', 220]
   ];
+  /* 示意動畫（純 CSS，無外部檔案）。tools.json 的 demo 欄位對應這裡的 key */
+  const DEMOS = {
+    'pii-masking': () => {
+      const rows = [['王小明', '0912-345-678', 'ming@example.com'], ['陳美玲', '0922-111-222', 'mei@example.com'], ['林大偉', '0933-987-654', 'wei@example.com']];
+      const masked = [['王○明', '0912-***-***', 'm***@example.com'], ['陳○玲', '0922-***-***', 'm***@example.com'], ['林○偉', '0933-***-***', 'w***@example.com']];
+      const cell = (i, j) => el('td', { style: '--d:' + ((i * 3 + j) * 0.18).toFixed(2) + 's' },
+        el('span', { class: 'raw', text: rows[i][j] }), el('span', { class: 'msk', text: masked[i][j] }), el('i', { class: 'hl' }));
+      return el('div', { class: 'demo demo-pii', 'aria-hidden': 'true' },
+        el('div', { class: 'demo-bar' }, el('span'), el('span'), el('span'), el('em', { text: '報名名單.xlsx' })),
+        el('table', {}, el('tbody', {}, rows.map((_, i) => el('tr', {}, cell(i, 0), cell(i, 1), cell(i, 2))))),
+        el('div', { class: 'demo-done', text: '已遮罩並匯出' }));
+    }
+  };
   const FALLBACK_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/></svg>';
   const CHEVRON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
 
@@ -189,6 +202,7 @@
     const panel = el('div', { class: 'panel' + (isOpen ? ' open' : ''), id: panelId, role: 'region', 'aria-label': tool.name + '的說明' },
       el('div', {},
         el('div', { class: 'panel-in' },
+          (tool.demo && DEMOS[tool.demo]) ? el('div', { class: 'block' }, DEMOS[tool.demo]()) : null,
           tool.purpose ? el('div', { class: 'block' }, el('h4', { class: 'plabel', text: '用途與場景' }), el('p', { text: tool.purpose })) : null,
           (tool.steps && tool.steps.length) ? el('div', { class: 'block' },
             el('h4', { class: 'plabel', text: tool.detailsLabel === '安裝方式' ? '安裝與使用' : '使用方式' }),

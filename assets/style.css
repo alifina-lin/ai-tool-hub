@@ -204,3 +204,29 @@ button{font:inherit;color:inherit}
 .about{max-width:34em}
 .about p+p{margin-top:6px}
 .foot .about-lead{margin-bottom:10px;color:var(--ink);font-weight:600}
+
+/* ---------- 示意動畫（個資遮罩） ---------- */
+.demo{margin:0 0 4px;border:1px solid var(--line);border-radius:8px;background:var(--paper);overflow:hidden;font-size:11.5px;position:relative}
+.demo-bar{display:flex;align-items:center;gap:5px;padding:6px 10px;border-bottom:1px solid var(--line);background:var(--tint)}
+.demo-bar span{width:7px;height:7px;border-radius:50%;background:rgba(28,28,28,.2)}
+.demo-bar em{margin-left:6px;font-style:normal;color:var(--muted);font-size:11px}
+.demo table{width:100%;border-collapse:collapse}
+.demo td{position:relative;padding:7px 10px;border-bottom:1px solid var(--line);white-space:nowrap;line-height:1.3}
+.demo tr:last-child td{border-bottom:0}
+.demo td .raw,.demo td .msk{display:block}
+.demo td .msk{position:absolute;left:10px;top:7px;opacity:0;font-weight:600}
+.demo td .hl{position:absolute;inset:3px 4px;border-radius:4px;background:rgba(255,196,110,.7);opacity:0}
+.demo-done{position:absolute;right:8px;top:3px;padding:1px 10px;border-radius:9999px;background:var(--ink);color:var(--paper);font-size:11px;opacity:0;transform:translateY(4px)}
+@media (prefers-reduced-motion:no-preference){
+  .demo td .raw{animation:d-raw 7s var(--d) infinite}
+  .demo td .msk{animation:d-msk 7s var(--d) infinite}
+  .demo td .hl{animation:d-hl 7s var(--d) infinite}
+  .demo-done{animation:d-done 7s infinite}
+}
+@media (prefers-reduced-motion:reduce){
+  .demo td .raw{opacity:0}.demo td .msk{opacity:1}.demo-done{opacity:1;transform:none}
+}
+@keyframes d-raw{0%,17%{opacity:1}22%,86%{opacity:0}92%,100%{opacity:1}}
+@keyframes d-msk{0%,17%{opacity:0}22%,86%{opacity:1}92%,100%{opacity:0}}
+@keyframes d-hl{0%,14%{opacity:0}18%{opacity:1}28%,100%{opacity:0}}
+@keyframes d-done{0%,48%{opacity:0;transform:translateY(4px)}54%,82%{opacity:1;transform:none}88%,100%{opacity:0;transform:translateY(4px)}}

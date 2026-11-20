@@ -7,7 +7,7 @@
     "ga4_measurement_id": "G-GHJP7QMYXS",
     "repo_url": "",
     "show_stats": false,
-    "updated": "2026-11-20T16:14:56+08:00",
+    "updated": "2026-11-20T16:33:53+08:00",
     "about": [
       "把做過的事，轉成可以重複使用的工具。",
       "這些都是我在工作中遇到麻煩、順手做出來的小東西。沒有誰規定要做，只是同事有時也用得到，就整理在這裡囉～",
@@ -48,7 +48,8 @@
         }
       ],
       "updated": "2026-11-02",
-      "usage": "免帳號、免安裝，用瀏覽器開啟；AI 輔助建規則為選用"
+      "usage": "免帳號、免安裝，用瀏覽器開啟；AI 輔助建規則為選用",
+      "demo": "pii-masking"
     },
     {
       "id": "cybersecurity-screen-posts",
